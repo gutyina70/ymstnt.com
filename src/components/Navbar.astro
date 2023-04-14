@@ -1,15 +1,16 @@
 ---
-const { title } = Astro.props;
+const { title, nav } = Astro.props;
 ---
 
 <nav>
-  <a href="/" id="title">
-    <h2>{title}</h2>
-  </a>
+  <h2><a href={nav} id="title">{title}</a></h2>
   <div id="buttons">
     <ul>
       <li>
         <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/tesi">Tesi</a>
       </li>
       <li>
         <a href="/blog">Blog</a>
@@ -33,6 +34,7 @@ const { title } = Astro.props;
 
   h2 {
     cursor: pointer;
+    padding: 0.4em;
   }
 
   #buttons {

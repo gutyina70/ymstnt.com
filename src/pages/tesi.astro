@@ -6,18 +6,27 @@ import Layout from "../layouts/Layout.astro";
   is:inline
   src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
 ></script>
-<Layout title="YMSTNT" description="YMSTNT's personal site">
+<Layout title="YMSTNT" description="Tesi a legrosszabb tantárgy, mennyi van még hátra?" nav="/">
   <section id="tesi-section">
     <div id="tesi">
-      <p>Hátralévő tesik:</p>
+      <p id="precount">Már csak</p>
       <h1 id="count"></h1>
-      <label for="include-mondays">Hétfők:</label>
+      <p id="aftercount">darab tesi van hátra.</p>
+      <p id="firstLessonParagraph" class="small">Ebből már csak <span id="firstLessons"></span> darab van az első órában.</p>
+      <!--<label for="include-mondays">Hétfők:</label>
       <input
         type="checkbox"
         id="include-mondays"
         onchange="updateDays()"
         checked
-      />
+      />-->
+    </div>
+    <div id="in-memoriam">
+      <h3 id="in-memoriam-title">In Memoriam</h3>
+      <img src="/doboz.png" id="dobozimg" alt="Törött műanyag doboz címkével az oldalán, a teteje kicsit le van csúszva és a kitört darabok mellette feküdnek">
+      <h3 id="dobozname">Telefonos doboz</h3>
+      <p class="small" id="livedate">2022.01.24 - 2023.03.24.</p>
+      <p class="small">Nem élte túl az utolsó 4 hetet 😢</p>
     </div>
   </section>
 </Layout>
@@ -25,10 +34,21 @@ import Layout from "../layouts/Layout.astro";
 <script is:inline>
   function updateDays() {
     var start = moment();
-    if (start.hours() > 16) {
+    let timeToDateTime = (hours, minutes) => {
+      return start.clone().startOf('day').add(hours, 'hours').add(minutes, 'minutes');
+    };
+    let hours = [
+      timeToDateTime(8, 45),
+      timeToDateTime(8, 45),
+      timeToDateTime(14, 35),
+      timeToDateTime(11, 35),
+      timeToDateTime(11, 35),
+    ];
+
+    if (start > hours[(start.day() - 1 + 7) % 7]) {
       start.add(1, "day");
     }
-    var end = moment("2023-04-28");
+    var end = moment("2023-05-04");
 
     var holidays = [
       moment("2023-01-01"),
@@ -42,6 +62,11 @@ import Layout from "../layouts/Layout.astro";
       moment("2023-01-25"),
       moment("2023-01-26"),
       moment("2023-01-27"),
+      moment("2023-02-20"),
+      moment("2023-02-21"),
+      moment("2023-02-22"),
+      moment("2023-02-23"),
+      moment("2023-02-24"),
       moment("2023-03-15"),
       moment("2023-04-06"),
       moment("2023-04-07"),
@@ -51,8 +76,9 @@ import Layout from "../layouts/Layout.astro";
       moment("2023-05-29"),
     ];
 
-    const includeMondays = document.querySelector("#include-mondays").checked;
+    //const includeMondays = document.querySelector("#include-mondays").checked;
     let days = 0;
+    let firstLessonDays = 0;
 
     // Count the days
     for (let current = moment(start); current < end; current.add(1, "day")) {
@@ -60,23 +86,64 @@ import Layout from "../layouts/Layout.astro";
       // Skip saturday and sunday
       if (dayOfWeek == 6 || dayOfWeek == 0) continue;
       // Skip monday if include mondays is turned off
-      if (!includeMondays && dayOfWeek == 1) continue;
+      //if (!includeMondays && dayOfWeek == 1) continue;
       // Skip if holiday
       const isHoliday = holidays.some((holiday) =>
         current.isSame(holiday, "day")
       );
       if (isHoliday) continue;
+
+      if (dayOfWeek == 1 || dayOfWeek == 2) {
+        firstLessonDays++;
+      }
+
       // Increment days when it passed all the previous checks
       days++;
     }
 
-    document.querySelector("#count").innerHTML = days;
+    if (days <= 20 && days > 10) {
+      document.querySelector("#count").style.color = "aqua";
+    } else if (days <= 10 && days > 5) {
+      document.querySelector("#count").style.color = "yellow";
+    } else if (days <= 5) {
+      document.querySelector("#count").style.color = "lime";
+    }
+
+    if (firstLessonDays <= 20 && firstLessonDays > 10) {
+      document.querySelector("#firstLessons").style.color = "aqua";
+    } else if (firstLessonDays <= 10 && firstLessonDays > 5) {
+      document.querySelector("#firstLessons").style.color = "yellow";
+    } else if (firstLessonDays <= 5) {
+      document.querySelector("#firstLessons").style.color = "lime";
+    }
+
+    if (days > 0) {
+      document.querySelector("#count").innerHTML = days;
+    }
+    else 
+    {
+      document.querySelector("#precount").innerHTML = "Nincs több tesi óra!"
+      document.querySelector("#count").innerHTML = "🎉🎉🎉";
+      document.querySelector("#aftercount").remove();
+      document.querySelector("#firstLessonParagraph").remove();
+    }
+
+    if (firstLessonDays > 0) {
+      document.querySelector("#firstLessons").innerHTML = firstLessonDays;
+    }
+    else
+    {
+      document.querySelector("#firstLessonParagraph").innerHTML = "Nincs több tesi az első órában! 🎉"
+      document.querySelector("#firstLessons").remove();
+    }
   }
 
   updateDays();
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap');
+
   body {
     margin: 0;
     overflow-wrap: break-word;
@@ -104,8 +171,59 @@ import Layout from "../layouts/Layout.astro";
     text-align: center;
   }
 
+  #in-memoriam {
+    justify-content: center;
+    align-items: center;
+    background: var(--surface1);
+    max-width: 20em;
+    border-radius: 1em;
+    padding: 2em;
+    margin: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  #in-memoriam-title {
+    font-family: 'Imperial Script', cursive;
+    font-weight: normal;
+    font-size: 2em;
+  }
+
+  #dobozimg {
+    width: 10em;
+    height: 10em;
+    margin-bottom: 0.5em;
+  }
+
+  #livedate {
+    color: grey;
+    margin-bottom: 0.5em;
+  }
+
+  #dobozname {
+    margin-bottom: 0.5em;
+  }
+
   p {
-    font-size: 1.3em;
+    font-size: 1.2em;
+  }
+
+  p, h1 {
+    margin: 0.7em;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .small {
+    font-size: 0.9em;
+    margin: 0;
+  }
+
+  #firstLessons {
+    font-weight: bold;
   }
 
   h1 {
@@ -123,6 +241,17 @@ import Layout from "../layouts/Layout.astro";
       left: unset;
       transform: unset;
       position: unset;
+      padding-bottom: 1em;
+    }
+  }
+
+  @media (max-height: 800px) {
+    #tesi-section {
+      position: unset;
+      left: unset;
+      top: unset;
+      transform: unset;
+      padding-bottom: 1em;
     }
   }
 </style>

@@ -2,8 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="YMSTNT" description="YMSTNT's personal site">
-  <section id="profile-section">
+<Layout title="YMSTNT" description="YMSTNT's personal site" nav="/">
+  <div id="profile-section-wrapper">
+    <section id="profile-section">
       <div id="profilepic-container">
         <img
           src="/tnt512.png"
@@ -14,7 +15,10 @@ import Layout from "../layouts/Layout.astro";
       </div>
       <h1 id="name">YMSTNT</h1>
       <div id="general-info">
-        <p id="bio">Student, computer enthusiast, (light) gamer</p>
+        <p id="bio">
+          CS student, aspiring sysadmin & front-end, casual gamer, aquarium
+          lover
+        </p>
         <a href="https://en.pronouns.page/he" id="pronouns">he/him</a>
       </div>
       <div id="profile-items">
@@ -40,12 +44,37 @@ import Layout from "../layouts/Layout.astro";
             <path
               d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
             ></path>
-          </svg>
-        </a>
+          </svg></a>
+        <a
+          href="https://mastodon.online/@ymstnt"
+          target="_blank"
+          title="Mastodon"
+          rel="me"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-brand-mastodon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M18.648 15.254c-1.816 1.763 -6.648 1.626 -6.648 1.626a18.262 18.262 0 0 1 -3.288 -.256c1.127 1.985 4.12 2.81 8.982 2.475c-1.945 2.013 -13.598 5.257 -13.668 -7.636l-.026 -1.154c0 -3.036 .023 -4.115 1.352 -5.633c1.671 -1.91 6.648 -1.666 6.648 -1.666s4.977 -.243 6.648 1.667c1.329 1.518 1.352 2.597 1.352 5.633s-.456 4.074 -1.352 4.944z"
+            ></path>
+            <path
+              d="M12 11.204v-2.926c0 -1.258 -.895 -2.278 -2 -2.278s-2 1.02 -2 2.278v4.722m4 -4.722c0 -1.258 .895 -2.278 2 -2.278s2 1.02 2 2.278v4.722"
+            ></path>
+          </svg></a>
         <a
           href="https://steamcommunity.com/id/ymstnt"
           target="_blank"
-          title="Steam: ymstnt"
+          title="Steam"
           rel="me"
         >
           <svg
@@ -65,37 +94,7 @@ import Layout from "../layouts/Layout.astro";
               d="M16.5 5a4.5 4.5 0 1 1 -.653 8.953l-4.347 3.009l0 .038a3 3 0 0 1 -2.824 2.995l-.176 .005a3 3 0 0 1 -2.94 -2.402l-2.56 -1.098v-3.5l3.51 1.755a2.989 2.989 0 0 1 2.834 -.635l2.727 -3.818a4.5 4.5 0 0 1 4.429 -5.302z"
             ></path>
             <circle fill="currentColor" cx="16.5" cy="9.5" r="1"></circle>
-          </svg>
-        </a>
-        <a
-          href="https://reddit.com/u/ymstnt0"
-          target="_blank"
-          title="Reddit: u/ymstnt0"
-          rel="me"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-brand-reddit"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#FFFFFF"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path
-              d="M12 8c2.648 0 5.028 .826 6.675 2.14a2.5 2.5 0 0 1 2.326 4.36c0 3.59 -4.03 6.5 -9 6.5c-4.875 0 -8.845 -2.8 -9 -6.294l-1 -.206a2.5 2.5 0 0 1 2.326 -4.36c1.646 -1.313 4.026 -2.14 6.674 -2.14z"
-            ></path>
-            <path d="M12 8l1 -5l6 1"></path>
-            <circle cx="19" cy="4" r="1"></circle>
-            <circle cx="9" cy="13" r=".5" fill="currentColor"></circle>
-            <circle cx="15" cy="13" r=".5" fill="currentColor"></circle>
-            <path d="M10 17c.667 .333 1.333 .5 2 .5s1.333 -.167 2 -.5"></path>
-          </svg>
-        </a>
+          </svg></a>
         <a
           title="Discord: YMSTNT#7422"
           href="https://discord.com/users/282565121673396224"
@@ -125,8 +124,7 @@ import Layout from "../layouts/Layout.astro";
             <path
               d="M8.5 17c0 1 -1.356 3 -1.832 3c-1.429 0 -2.698 -1.667 -3.333 -3c-.635 -1.667 -.476 -5.833 1.428 -11.5c1.388 -1.015 2.782 -1.34 4.237 -1.5l1 2.5"
             ></path>
-          </svg>
-        </a>
+          </svg></a>
       </div>
       <hr />
       <div id="introduction">
@@ -137,12 +135,14 @@ import Layout from "../layouts/Layout.astro";
           >
         </p>
         <p>
-          I'm a high school student studying computer science, software
-          development. My hobbies include tinkering with Linux, playing video
-          games and aquariums.
+          I'm a high school student passionate about software development and
+          computer science. In my free time, I enjoy tinkering with technology
+          (mainly Linux and servers), playing casual games, and caring for my
+          aquarium.
         </p>
       </div>
-  </section>
+    </section>
+  </div>
 </Layout>
 
 <style>
@@ -188,11 +188,11 @@ import Layout from "../layouts/Layout.astro";
 
   #pronouns {
     color: gray;
-    padding: 1em;
+    padding: 0.5em;
   }
 
   #profile-items {
-    padding: 0.5em 0 0 0;
+    padding: 0;
     margin: 1.5em 0 0 0;
     letter-spacing: 0.5em;
     user-select: none;
@@ -211,6 +211,10 @@ import Layout from "../layouts/Layout.astro";
 
   #introduction {
     text-align: left;
+  }
+
+  #introduction p {
+    margin-bottom: 0;
   }
 
   #pronouncination {
@@ -232,6 +236,9 @@ import Layout from "../layouts/Layout.astro";
       left: unset;
       top: unset;
       transform: unset;
+    }
+    #profile-section-wrapper {
+      padding: 2em 0;
     }
   }
 
